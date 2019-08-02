@@ -2,6 +2,8 @@ local UI = {}
 
 function UI.newButton(coord, spritesheet, rect, scale)
     local Button = {}
+
+    -- Store some properties for the newly created button
     Button.sprite = love.graphics.newImage(spritesheet)
     Button.coord = coord
     Button.rect = rect
@@ -9,6 +11,7 @@ function UI.newButton(coord, spritesheet, rect, scale)
     Button.quads = {}
     Button.toDraw = 1
 
+    -- Create quads for a button, part of the sprite displayed alternatively
     for x = 0, Button.sprite:getWidth() - Button.rect[1], Button.rect[1] do
         for y = 0, Button.sprite:getHeight() - Button.rect[2], Button.rect[2] do
             table.insert(Button.quads, love.graphics.newQuad(x, y,
