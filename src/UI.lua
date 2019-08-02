@@ -9,8 +9,8 @@ function UI.newButton(coord, spritesheet, rect, scale)
     Button.quads = {}
     Button.toDraw = 1
 
-    for y = 0, Button.sprite:getWidth() - Button.rect[1], Button.rect[1] do
-        for x = 0, Button.sprite:getHeight() - Button.rect[2], Button.rect[2] do
+    for x = 0, Button.sprite:getWidth() - Button.rect[1], Button.rect[1] do
+        for y = 0, Button.sprite:getHeight() - Button.rect[2], Button.rect[2] do
             table.insert(Button.quads, love.graphics.newQuad(x, y,
                 Button.rect[1], Button.rect[2], Button.sprite:getDimensions()))
         end
@@ -29,9 +29,12 @@ function UI.newButton(coord, spritesheet, rect, scale)
         local x, y = love.mouse.getPosition()
 
         if x >= Button.coord[1] and x <= Button.coord[1] + Button.rect[1] and
-        y >= Button.coord[2] and y <= Button.coord[2] + Button.rect[2] and
-        love.mouse.isDown(1) then
-            Button.toDraw = 2
+        y >= Button.coord[2] and y <= Button.coord[2] + Button.rect[2] then
+            if love.mouse.isDown(1) then
+                Button.toDraw = 3
+            else
+                Button.toDraw = 2
+            end
         else
             Button.toDraw = 1
         end
