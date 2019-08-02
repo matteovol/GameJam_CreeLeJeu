@@ -1,5 +1,6 @@
 UI = require("src/UI")
 Map = require("src/Map")
+Player = require("src/Player")
 
 -- Different types of scene
 SceneType = {
@@ -13,7 +14,7 @@ SceneType = {
 function love.load(args)
     -- Load some default values
     WIN_SIZE = {width = 1920, height = 1080}
-    SCENE = SceneType.Game
+    SCENE = SceneType.Menu
     RSC_F = "ressources/"
     TILES_F = "ressources/tiles/"
     FONT = love.graphics.newFont(RSC_F .. "champifont.ttf", 20, "normal")
@@ -37,8 +38,21 @@ function love.update(dt)
 
         -- Event checker for ui elements
         for i = 1, #Buttons do
-            Buttons[i].checkEvent()
+            pressed = Buttons[i].checkEvent()
+            if pressed then
+                if i == 1 then
+                    SCENE = SceneType.Game
+                elseif i == 2 then
+                    SECNE = SceneType.Options
+                elseif i == 3 then
+                    SCENE = SceneType.Credit
+                end
+            end
         end
+
+    elseif SCENE == SceneType.Game then
+
+        -- Event checker for game scene
 
     end
 end
@@ -51,6 +65,8 @@ function love.draw()
         for i = 1, #Buttons do
             Buttons[i].draw()
         end
+
+    elseif SCENE == SceneType.Options then
 
     elseif SCENE == SceneType.Credit then
 

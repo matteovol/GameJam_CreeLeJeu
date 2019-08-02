@@ -35,12 +35,14 @@ function UI.newButton(coord, spritesheet, rect, scale)
         y >= Button.coord[2] and y <= Button.coord[2] + Button.rect[2] then
             if love.mouse.isDown(1) then
                 Button.toDraw = 3
+                return true
             else
                 Button.toDraw = 2
             end
         else
             Button.toDraw = 1
         end
+        return false
     end
 
     return Button

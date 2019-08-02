@@ -1,4 +1,4 @@
-Map = {}
+local Map = {}
 
 RSC = "ressources/"
 
@@ -23,7 +23,6 @@ function Map.loadMap(filepath)
 
     return lines
 end
-
 
 -- Return a list of a map
 function Map.loadTiles(dirpath)
