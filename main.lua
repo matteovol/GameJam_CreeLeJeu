@@ -30,6 +30,8 @@ function love.load(args)
     table.insert(Buttons, buttonOptions)
     local buttonCredit = UI.newButton({100, 500}, RSC_F .. "button3.png", {513/3, 49})
     table.insert(Buttons, buttonCredit)
+
+    P = Player.newPlayer({100, 100}, RSC .. "warrior.png", {576/9, 256/4})
 end
 
 function love.update(dt)
@@ -53,6 +55,7 @@ function love.update(dt)
     elseif SCENE == SceneType.Game then
 
         -- Event checker for game scene
+        P.update(dt)
 
     end
 end
@@ -97,11 +100,30 @@ function love.draw()
             end
         end
 
+        P.draw()
+
+    elseif SCENE == SceneType.Fight then
+
     end
 end
 
 function love.keypressed(key, scancode, isrepeat)
-    if key == "escape" then
-        love.event.quit()
+    if SCENE == SceneType.Menu then
+        if key == "escape" then
+            love.event.quit()
+        end
+    elseif SCENE == SceneType.Option then
+        if key == "escape" then
+            SCENE = SceneType.Menu
+        end
+    elseif SCENE == SceneType.Credit then
+        if key == "escape" then
+            SCENE = SceneType.Menu
+        end
+    elseif SCENE == SceneType.Game then
+        if key == "escape" then
+            SCENE = SceneType.Menu
+        end
+    elseif SCENE == SceneType.Fight then
     end
 end
