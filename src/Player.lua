@@ -9,7 +9,7 @@ function Player.newPlayer(coord, spritesheet, rect, speed)
     P.drawFrom = 28
     P.drawTo = 36
     P.toDraw = 28
-    P.speed = speed or 10
+    P.speed = speed or 7
 
     for y = 0, P.sprite:getHeight() - P.rect[2], P.rect[2] do
         for x = 0, P.sprite:getWidth() - P.rect[1], P.rect[1] do
@@ -22,7 +22,7 @@ function Player.newPlayer(coord, spritesheet, rect, speed)
         love.graphics.draw(P.sprite, P.quads[P.toDraw], P.coord[1], P.coord[2])
     end
 
-    function P.update(dt)
+    function P.animate()
         if love.keyboard.isDown("z") then
 
             -- Animate player
@@ -35,10 +35,6 @@ function Player.newPlayer(coord, spritesheet, rect, speed)
                 P.drawTo = 27
                 P.toDraw = 19
             end
-
-            -- Move player
-            P.coord[2] = P.coord[2] - P.speed
-
         elseif love.keyboard.isDown("q") then
 
             -- Animate player
@@ -51,10 +47,6 @@ function Player.newPlayer(coord, spritesheet, rect, speed)
                 P.drawTo = 9
                 P.toDraw = 1
             end
-
-            -- Move player
-            P.coord[1] = P.coord[1] - P.speed
-
         elseif love.keyboard.isDown("s") then
 
             -- Animate player
@@ -67,10 +59,6 @@ function Player.newPlayer(coord, spritesheet, rect, speed)
                 P.drawTo = 36
                 P.toDraw = 28
             end
-
-            -- Move player
-            P.coord[2] = P.coord[2] + P.speed
-
         elseif love.keyboard.isDown("d") then
 
             -- Animate player
@@ -83,11 +71,21 @@ function Player.newPlayer(coord, spritesheet, rect, speed)
                 P.drawTo = 18
                 P.toDraw = 10
             end
-
-            -- Move player
-            P.coord[1] = P.coord[1] + P.speed
-
         end
+    end
+
+    P.coordUpdate = function()
+
+        if love.keyboard.isDown("z") then
+            P.coord[2] = P.coord[2] - P.speed
+        elseif love.keyboard.isDown("q") then
+            P.coord[1] = P.coord[1] - P.speed
+        elseif love.keyboard.isDown("s") then
+            P.coord[2] = P.coord[2] + P.speed
+        elseif love.keyboard.isDown("d") then
+            P.coord[1] = P.coord[1] + P.speed
+        end
+
     end
 
     return P

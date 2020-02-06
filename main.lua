@@ -55,7 +55,8 @@ function love.update(dt)
     elseif SCENE == SceneType.Game then
 
         -- Event checker for game scene
-        P.update(dt)
+        P.animate()
+        P.coordUpdate()
 
     end
 end
